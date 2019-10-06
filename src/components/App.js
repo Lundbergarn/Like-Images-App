@@ -21,7 +21,7 @@ class App extends React.Component {
     const response = await unsplash.get('/search/photos', {
       params: { query: term, per_page: 30}
     });
-
+    console.dir(response.data.results)
     this.setState({ images: response.data.results, loading: false })
   }
 
@@ -39,7 +39,7 @@ class App extends React.Component {
 
     this.setState((state, props) => ({
       images: saveLike,
-      savedImages: [...state.savedImages, {id, urls:{small: url}, alt_description, liked}]
+      savedImages: [...state.savedImages, {id, urls:{regular: url}, alt_description, liked}]
     }));
   }
 

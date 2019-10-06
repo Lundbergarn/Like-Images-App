@@ -1,8 +1,9 @@
 .card-container {
   position: relative;
   cursor: pointer;
+  /* width: 33.333%; */
+  /* padding: 0 5px; */
 }
-
 .card-container img:hover {
   filter: brightness(110%);
 }

@@ -33,11 +33,12 @@ class ImageCard extends React.Component {
     const { alt_description, urls, id, liked = false } = this.props.image;
     return ( 
       <div key={id} className="card-container" style={{ gridRowEnd: `span ${this.state.spans}` }}>
+      {/* <div key={id} className="card-container"> */}
         <img 
           ref={this.imageRef}
           alt={alt_description}
-          src={urls.small}
-          onClick={(e) => this.likeImage(e, urls.small, alt_description, id)}
+          src={urls.regular}
+          onClick={(e) => this.likeImage(e, urls.regular, alt_description, id)}
         />
         <i className={!liked ? "outline heart icon" : "heart icon"} ></i>
       </div>
