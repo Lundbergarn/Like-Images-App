@@ -3,38 +3,60 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import unsplash from '../api/unsplash';
 import Navbar from './Navbar';
 import SearchBar from './SearchBar';
+import Loader from './Loader';
 import ImageList from './ImageList';
 import ImagePage from './ImagePage.js';
-import Favorites from './Favorites';
+import FavoritesPage from './FavoritesPage';
 
 class App extends React.Component {
   state = { 
     images: [],
-    savedImages: []
+    savedImages: [],
+    loading: false
   };
 
   onSearchSubmit = async term => {
+    this.setState({ loading: true });
+    
     const response = await unsplash.get('/search/photos', {
-      params: { query: term, per_page: 25}
+      params: { query: term, per_page: 30}
     });
 
-    this.setState({ images: response.data.results })
+    this.setState({ images: response.data.results, loading: false })
   }
 
-  saveImage = async (id, url, alt_description) => {
+  // Save liked image
+  saveImage = (id, url, alt_description) => {
     let liked = false;
 
     const saveLike = this.state.images.map(image => {
-      if(image.id === id) {
+      if (image.id === id) {
         image.liked = true;
         liked = true;
       }
       return image;
     });
 
-    await this.setState((state, props) => ({
+    this.setState((state, props) => ({
       images: saveLike,
       savedImages: [...state.savedImages, {id, urls:{small: url}, alt_description, liked}]
+    }));
+  }
+
+  // Remove unlicked image
+  removeImage = (id) => {
+    const removeLike = this.state.images.map(image => {
+      if (image.id === id) {
+        image.liked = false;
+      }
+      return image;
+    });
+
+    let savedImages = this.state.savedImages.filter( image => image.id !== id);
+
+    this.setState((state, props) => ({
+      images: removeLike,
+      savedImages: [...savedImages]
     }));
   }
 
@@ -44,16 +66,28 @@ class App extends React.Component {
         <BrowserRouter>
           <Navbar />
 
+          {this.state.loading ? <Loader /> : null}
+
           <Route path="/" exact>
             <ImagePage>
               <SearchBar onSubmit={this.onSearchSubmit} />
               <p>Found: {this.state.images.length} images</p>
-              <ImageList images={this.state.images} saveImage={this.saveImage}/>
+              <ImageList
+                images={this.state.images}
+                saveImage={this.saveImage}
+                removeImage={this.removeImage}
+              />
             </ImagePage>
           </Route>
 
           <Route path="/favorites" exact>
-            <Favorites images={this.state.savedImages}></Favorites>
+            <FavoritesPage>
+              <ImageList
+                images={this.state.savedImages}
+                saveImage={this.saveImage}
+                removeImage={this.removeImage}
+              />
+            </FavoritesPage>
           </Route>
 
         </BrowserRouter>

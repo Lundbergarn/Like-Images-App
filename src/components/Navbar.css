@@ -1,0 +1,7 @@
+.ui.secondary.navbar {
+  padding: 10px 0;
+}
+.ui.secondary.navbar .item{
+  text-transform: uppercase;
+  border: 1px solid rgba(0,0,0,0.1);
+}

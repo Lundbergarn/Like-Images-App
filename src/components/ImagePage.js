@@ -5,7 +5,7 @@ const ImagePage = (props) => {
     <div>
       {props.children}
     </div>
-  )
-}
+  );
+};
 
 export default ImagePage;

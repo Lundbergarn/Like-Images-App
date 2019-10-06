@@ -9,9 +9,9 @@
 
 .card-container i {
   position: absolute;
-  bottom: 10px;
+  bottom: 20px;
   right: 10px;
-  font-size: 25px;
+  font-size: 18px;
   transition: 0.2s ease-in-out;
 }
 
@@ -20,8 +20,15 @@
 }
 .heart {
   color: white;
-  font-weight: 400;
 }
 .heart:not(.outline) {
   color: red;
+}
+.heart:not(.outline) { 
+  animation: scale-heart 0.2s alternate ease-in;
+}
+@keyframes scale-heart {
+  0%   {transform: scale(1);}
+  50% {transform: scale(1.5);}
+  100% {transform: scale(1);}
 }

@@ -9,6 +9,7 @@ const ImageList = props => {
           key={image.id}
           image={image}
           saveImage={props.saveImage}
+          removeImage={props.removeImage}
         />
       )
   });
