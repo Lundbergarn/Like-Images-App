@@ -21,10 +21,10 @@ class ImageCard extends React.Component {
 
   // Like Image 
   likeImage = (e, url, alt, id, liked) => {
-    if (e.target.nextSibling.className.includes('outline') || e.target.className.includes('outline')) {
+    if (e.target.className.includes('outline')) {
       this.props.saveImage(id, url, alt, liked);
     } else {
-      e.target.nextSibling.className += ' outline';
+      e.target.className += ' outline';
       this.props.removeImage(id);
     }
   }
@@ -38,9 +38,12 @@ class ImageCard extends React.Component {
           ref={this.imageRef}
           alt={alt_description}
           src={urls.regular}
-          onClick={(e) => this.likeImage(e, urls.regular, alt_description, id)}
+          onClick={(e) => this.props.openModal(e)}
         />
-        <i className={!liked ? "outline heart icon" : "heart icon"} ></i>
+        <i
+          className={!liked ? "outline heart icon" : "heart icon"}
+          onClick={(e) => this.likeImage(e, urls.regular, alt_description, id)}
+        ></i>
       </div>
     )
   }

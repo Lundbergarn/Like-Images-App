@@ -10,9 +10,9 @@
 
 .card-container i {
   position: absolute;
-  bottom: 20px;
+  bottom: 15px;
   right: 10px;
-  font-size: 18px;
+  font-size: 24px;
   transition: 0.2s ease-in-out;
 }
 

@@ -21,7 +21,6 @@ class App extends React.Component {
     const response = await unsplash.get('/search/photos', {
       params: { query: term, per_page: 30}
     });
-    console.dir(response.data.results)
     this.setState({ images: response.data.results, loading: false })
   }
 
