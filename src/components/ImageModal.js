@@ -11,7 +11,7 @@ const ImageModal = (props) => {
     <div className="ui modal">
       <div className="image content">
         <img className="image" src={props.image} alt=""></img>
-        <span onClick={() => {closeModal()}} class="close">&times;</span>
+        <span onClick={() => {closeModal()}} className="close">&times;</span>
       </div>
     </div>
   );

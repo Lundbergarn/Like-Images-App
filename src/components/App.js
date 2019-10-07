@@ -70,7 +70,7 @@ class App extends React.Component {
           <Route path="/" exact>
             <ImagePage>
               <SearchBar onSubmit={this.onSearchSubmit} />
-              <p>Found: {this.state.images.length} images</p>
+              {this.state.images.length === 0 ? <p>Search for images</p> : <p>Found: {this.state.images.length} images</p>}
               <ImageList
                 images={this.state.images}
                 saveImage={this.saveImage}
